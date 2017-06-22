@@ -1,4 +1,4 @@
-import { assert } from 'chai'
+import invariant from 'invariant'
 import { createAction } from 'redux-actions'
 
 /**
@@ -24,10 +24,10 @@ export const createBlueprint = (blueprintType, payloadCreator = args => args, me
  * @return {blueprintTypeTranslator}          Function that accepts array or object of blueprint type values and returns action types.
  */
 export const translateBlueprintTypesWith = translateBlueprintType => blueprintTypes => {
-  assert.ok(blueprintTypes, 'blueprint types are required')
+  invariant(blueprintTypes, 'blueprint types are required')
   if(Array.isArray(blueprintTypes))
     return blueprintTypes.map(x => translateBlueprintType(x))
-  assert(typeof blueprintTypes === 'object', 'blueprint types must be array or object')
+  invariant(typeof blueprintTypes === 'object', 'blueprint types must be array or object')
   return Object.keys(blueprintTypes).reduce((actionTypes, x) => {
     actionTypes[x] = translateBlueprintType(blueprintTypes[x])
     return actionTypes
@@ -48,10 +48,10 @@ export const translateBlueprintTypesWith = translateBlueprintType => blueprintTy
  * @return {blueprintTranslator}              Function that accepts array or object of blueprint values and returns redux-actions FSA actionCreators.
  */
 export const translateBlueprintsWith = translateBlueprintType => blueprints => {
-  assert.ok(blueprints, 'blueprints are required')
+  invariant(blueprints, 'blueprints are required')
   if(Array.isArray(blueprints))
     return blueprints.map(x => blueprint(translateBlueprintType))
-  assert(typeof blueprints === 'object', 'blueprints must be array or object')
+  invariant(typeof blueprints === 'object', 'blueprints must be array or object')
   return Object.keys(blueprints).reduce((actionCreators, x) => {
     actionCreators[x] = blueprints[x](translateBlueprintType)
     return actionCreators
