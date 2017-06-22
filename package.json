@@ -49,7 +49,7 @@
   },
   "homepage": "https://cchamberlain.github.io/redux-blueprint",
   "dependencies": {
-    "chai": "^3.5.0",
+    "invariant": "^2.2.2",
     "redux-actions": "^0.9.1"
   }
 }
